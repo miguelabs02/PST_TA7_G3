@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "829018673034",
+    "firebase_url": "https://soportetecnico-e2048.firebaseio.com",
+    "project_id": "soportetecnico-e2048",
+    "storage_bucket": "soportetecnico-e2048.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829018673034:android:bb221f15044e98a0",
+        "android_client_info": {
+          "package_name": "com.example.soportetecnico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829018673034-obgmgsnngto7ncft8vvgtgdlfi7j519d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5HRQ-UPbflm338tyEKKNjWHuSSX7_-7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829018673034-obgmgsnngto7ncft8vvgtgdlfi7j519d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

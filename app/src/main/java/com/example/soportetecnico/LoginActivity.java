@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             int pos = email.indexOf("@");
                             String user = email.substring(0, pos);
-                                Toast.makeText(LoginActivity.this, "Bienvenido: " + LoginActivity.this.email.getText(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Bienvenido: " + LoginActivity.this.email.getText(), Toast.LENGTH_LONG).show();
                             //Intent intencion = new Intent(getApplication(), WellcomeActivity.class);
                             //intencion.putExtra(WellcomeActivity.user, user);
                             //startActivity(intencion);

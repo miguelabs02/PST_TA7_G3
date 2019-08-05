@@ -4,6 +4,9 @@ import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -45,6 +48,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private ProgressBar progressBar;
 
+    public static RegisterActivity dataBaseManager;
+    private SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +69,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         email =(EditText)findViewById(R.id.email);
         pwd =(EditText)findViewById(R.id.pwd);
         btnLogin = (Button) findViewById(R.id.btn_login);
-
+        if(dataBaseManager ==null){
+            dataBaseManager = new RegisterActivity(this,"administrador",null,1);
+        }
         signInButtonGoogle = (SignInButton) findViewById(R.id.signInButtonGoogle);
         signInButtonGoogle.setSize(SignInButton.SIZE_WIDE);
         signInButtonGoogle.setColorScheme(SignInButton.COLOR_DARK);
@@ -221,7 +229,31 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         }
                     }
                 });
+        validarLoginBaseDatos(email,password);
+    }
 
-
+    public void validarLoginBaseDatos(String email,String pwd){
+        db = dataBaseManager.getReadableDatabase();
+        Cursor fila = db.rawQuery(
+                "select contrasena,nombres,apellidos,sexo from usuarios where usuario='"+email+"'",null);
+        if(fila.moveToFirst()) {
+            if (fila.getString(0).equals(pwd)) {
+                Toast.makeText(this, "dentro", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, UserActivity.class);
+                db.close();
+                //Log.e(TAG, email + "\n" + pwd + "\n" + fila.getString(1) + "\n" + fila.getString(2) + "\n" + fila.getString(3));
+                intent.putExtra("Nombres", fila.getString(1));
+                intent.putExtra("Apellidos", fila.getString(2));
+                intent.putExtra("Sexo", fila.getString(3));
+                intent.putExtra("Correo", email);
+                startActivity(intent);
+            }
+        }else{
+            Toast.makeText(this, "No existe usuario con esos datos", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void register_user(View view){
+        Intent intent = new Intent(this,SignupActivity.class);
+        startActivity(intent);
     }
 }

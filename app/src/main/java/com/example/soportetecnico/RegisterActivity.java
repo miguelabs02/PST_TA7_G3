@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 
 public class RegisterActivity extends SQLiteOpenHelper {
 
+
     public RegisterActivity(Context context, String name,
                             SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -17,20 +18,13 @@ public class RegisterActivity extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table usuarios(usuario text primary key, contraseña text," +
-                "nombres text, apellidos text, fecha_nacimiento text, producto text)");
+        db.execSQL("create table usuarios(usuario text primary key, contrasena text," +
+                "nombres text, apellidos text, fecha_nacimiento text,sexo text)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-
-    /**
-     * Se utiliza el formato de fecha iso8601Format yyyy-MM-dd HH:mm:ss
-     * @param context
-     * @param fecha
-     * @return
-     */
 
 }

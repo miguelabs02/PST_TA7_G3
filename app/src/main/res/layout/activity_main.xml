@@ -112,7 +112,9 @@
             android:id="@+id/problemasSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp" />
+            android:layout_margin="16dp"
+            android:dropDownWidth="match_parent"
+            android:popupBackground="@color/blue_grey_900" />
 
         <TextView
             android:id="@+id/textView23"
@@ -131,7 +133,7 @@
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:maxLines="8"
-            android:textColor="#FFFFFF" />
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btn_enviar"

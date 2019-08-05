@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">SoporteTecnico</string>
+    <string name="app_name">Soporte Técnico</string>
+    <string name="not_log_in">No se pudo iniciar sesión</string>
+    <string name="log_out">Log Out</string>
+    <string name="revoke">Revoke</string>
+    <string name="not_close_session">No se pudo cerrar sesión</string>
+    <string name="not_revoke">No se pudo revocar el acceso</string>
+    <string name="not_firebase_auth">No se pudo autenticar con Firebase</string>
+    <string name="content_description">User profile picture</string>
 </resources>

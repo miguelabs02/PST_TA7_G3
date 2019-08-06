@@ -189,12 +189,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     /**
-     *  Para detener el oyente cuando cierre sesión
+     *  Para detener el oyente cuando termine la pantalla de login
+     *  Es decir, ya no necesita autorizarse
      */
     @Override
     protected void onStop() {
         super.onStop();
         if (firebaseAuthListener != null) {
+            Toast.makeText(getApplicationContext(), "Detenido el authListener", Toast.LENGTH_SHORT).show();
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
     }

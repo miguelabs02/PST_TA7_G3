@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "829018673034-varvdok8tptlt4h6jphku37uqsjf36rd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.soportetecnico",
+            "certificate_hash": "78cee4cd7bc940cd0b8a7f5abb619d37f80090d9"
+          }
+        },
+        {
           "client_id": "829018673034-obgmgsnngto7ncft8vvgtgdlfi7j519d.apps.googleusercontent.com",
           "client_type": 3
         }

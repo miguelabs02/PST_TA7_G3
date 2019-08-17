@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,13 +16,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -68,7 +65,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-        firebaseAuth = FirebaseAuth.getInstance();
 
         email =(EditText)findViewById(R.id.email);
         pwd =(EditText)findViewById(R.id.pwd);
@@ -88,6 +84,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
 
 
+        firebaseAuth = FirebaseAuth.getInstance();
 
         // el oyente se encarga de dirigir al usuario al main
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -124,18 +121,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SIGN_IN_CODE) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            //GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            //handleSignInResult(task);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Toast.makeText(this, R.string.not_log_in+e.toString(), Toast.LENGTH_LONG).show();
-                // ...
-            }
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
         }
     }
 
@@ -189,14 +176,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     /**
-     *  Para detener el oyente cuando termine la pantalla de login
-     *  Es decir, ya no necesita autorizarse
+     *  Para detener el oyente cuando cierre sesión
      */
     @Override
     protected void onStop() {
         super.onStop();
         if (firebaseAuthListener != null) {
-            Toast.makeText(getApplicationContext(), "Detenido el authListener", Toast.LENGTH_SHORT).show();
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
     }
